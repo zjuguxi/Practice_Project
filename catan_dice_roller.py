@@ -4,14 +4,16 @@ from random import randint
 def roll():
     a = randint(1, 6)
     b = randint(1, 6)
-  
-  write = raw_input("Press enter to roll >>>>>")
+    
+    write = raw_input("Press enter to roll >>>>>")
 
-  if write == "":
-		print a + b
-		roll()
-	else:
-		print "Press ENTER BUTTON please！"
-		roll()
-
+    if write == "":
+  	print a + b
+	roll()
+	
+    else:
+        print "Press ENTER BUTTON please！"
+	roll()
+	
+    print "Press CTRL-C to quit."
 roll()
