@@ -14,13 +14,14 @@ def roll():
         print "Dice A = ", a
         print "Dice B = ", b
         print "Sum is >>>>>>>>> ", a + b ," <<<<<<<<<"
-        roll()
+
     
     elif write == "quit":
         exit(0)
 
     else:
         print "Press ENTER BUTTON please！"
-        roll()
+        
+    roll()
     
 roll()
