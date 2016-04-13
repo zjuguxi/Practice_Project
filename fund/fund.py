@@ -51,14 +51,14 @@ fundValue_xq = ''.join(fundValueList_xq)
 fundValueList_hs = numRegex.findall(matchString_hs)
 fundValue_hs = ''.join(fundValueList_hs)
 
-print('XQ Value per share is :' + fundValue_xq)
-print('HS Value per share is :' + fundValue_hs)
+print('兴全轻资产 每份额净值 :' + fundValue_xq)
+print('华商优势行业 每份额净值 :' + fundValue_hs)
 
 total = round(float(fundValue_xq) *  100940.38 + float(fundValue_hs) * 220322.65, 2)
 
-print('Total Value : ' + str(total))
+print('持仓总额  : ' + str(total))
 
 if total < 500000:
-  print('Loss:' + str(round(total - 500000, 2)))
+  print('亏损:' + str(round(total - 500000, 2)))
 else:
-  print('Profit:' + str(round(total - 500000, 2)))
+  print('盈利:' + str(round(total - 500000, 2)))
