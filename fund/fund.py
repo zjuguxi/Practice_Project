@@ -54,9 +54,9 @@ fundValue_hs = ''.join(fundValueList_hs)
 print('兴全轻资产 每份额净值 :' + fundValue_xq)
 print('华商优势行业 每份额净值 :' + fundValue_hs)
 
-total = round(float(fundValue_xq) *  100940.38 + float(fundValue_hs) * 220322.65, 2)
+total = float(fundValue_xq) *  100940.38 + float(fundValue_hs) * 220322.65
 
-print('持仓总额  : ' + str(total))
+print('持仓总额  : ' + str(round(total, 2)))
 
 if total < 500000:
   print('亏损:' + str(round(total - 500000, 2)))
