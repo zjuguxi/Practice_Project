@@ -9,21 +9,12 @@ from flask.ext.login import login_required
 @app.route('/', methods = ['GET', 'POST']) 
 @app.route('/index')
 def index():
-    user = {'nickname': 'zjuguxi'}
+    return render_template('index.html', title = 'Home')
 
-    posts =[
-            {
-                'author': {'nickname': 'zjuguxi'},
-                'post_title': 'First post'
-            },
-             {
-                'author': {'nickname': 'zjuguxi'},
-                'post_title': 'Second post'
-            }
-
-   ]
-    return render_template('index.html', title = 'Home', user = user, posts = posts)
-
+# 帖子页
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    return 'Post %d' % post_id
 
 # 登陆
 @app.route('/login', methods = ['GET', 'POST'])
