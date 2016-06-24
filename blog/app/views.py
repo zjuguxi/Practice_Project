@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for
 from datetime import datetime
-from run import app
+from . import app
 
 @app.route('/', methods = ['GET', 'POST'])
 def index():
