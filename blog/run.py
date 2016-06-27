@@ -1,12 +1,8 @@
-from flask import Flask
-from flask_script import Manager
-from flask_moment import Moment
+# -*- coding:utf-8 -*-
 
+from app import create_app, db
 
-app = Flask(__name__)
-manager = Manager(app)
-moment = Moment(app)
+app = create_app()
 
-from app import views
-if __name__ == '__main__':
-    manager.run()
+if  __name__ == '__main__':
+    app.run(debug = True)
