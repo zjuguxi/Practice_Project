@@ -4,7 +4,7 @@
 
 <form method="POST" action="/">
     {{ form.csrf_token }}
-    {{ form.name.label }} {{ form.name(size=20) }}
+    {{ form.post.label }} {{ form.post(size=140) }}
     <input type="submit" value="Go">
 </form>
 
