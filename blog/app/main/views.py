@@ -2,14 +2,19 @@ from flask import render_template, redirect, url_for, session
 from datetime import datetime
 from . import main
 from app.forms import PostForm
+from flask_login import current_user
+from ..models import Post
+
 
 @main.route('/', methods = ['GET', 'POST'])
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        session['post'] = form.post.data
-        return redirect(url_for('index'))
-    return render_template('index.html', current_time = datetime.utcnow(), form = form, post = session.get('post'))
+        post = Post(body = form.body.data, author= 'admin')
+        db.session.add(post)
+        return redirect(url_for('.index'))
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    return render_template('index.html', form = form, posts = posts)
 
 @main.route('/user/<name>')
 def user(name):
