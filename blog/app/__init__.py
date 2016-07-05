@@ -3,9 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_moment import Moment
 from flask_bootstrap import Bootstrap
 
+
 moment = Moment ()
-db = SQLAlchemy()
 bootstrap = Bootstrap()
+db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
