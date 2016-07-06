@@ -16,10 +16,6 @@ def index():
     posts = Post.query.order_by(Post.timestamp.desc()).all()
     return render_template('index.html', current_time = datetime.utcnow(), form = form, posts = posts)
 
-@main.route('/user/<name>')
-def user(name):
-    return render_template('user.html', name = name)
-
 @main.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
