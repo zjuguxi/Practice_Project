@@ -11,7 +11,6 @@ db = SQLAlchemy()
 def create_app():
     app = Flask(__name__)
     db.init_app(app)
-    db.create_all()
     moment.init_app(app)
     bootstrap.init_app(app)
     app.secret_key = 'SECRET_KEY'
