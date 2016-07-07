@@ -13,7 +13,7 @@ def index():
         post = Post(body = form.body.data, author= 'admin')
         db.session.add(post)
         return redirect(url_for('.index'))
-    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    # posts = Post.query.order_by(Post.timestamp.desc()).all()
     return render_template('index.html', current_time = datetime.utcnow(), form = form, posts = posts)
 
 @main.errorhandler(404)
