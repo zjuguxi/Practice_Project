@@ -10,11 +10,14 @@ from ..models import Post
 def index():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(body = form.body.data, author= 'admin')
+        post = Post(body = form.body.data)
         db.session.add(post)
+        db.session.commit()
         return redirect(url_for('.index'))
-    # posts = Post.query.order_by(Post.timestamp.desc()).all()
-    return render_template('index.html', current_time = datetime.utcnow(), form = form, posts = posts)
+# 下面这两行会导致找不到表posts的错误，原因未知
+#    posts = Post.query.order_by(Post.timestamp.desc()).all()
+#    return render_template('index.html', current_time = datetime.utcnow(), form = form, posts = posts)
+    return render_template('index.html', current_time = datetime.utcnow(), form = form, posta = posts)
 
 @main.errorhandler(404)
 def page_not_found(e):

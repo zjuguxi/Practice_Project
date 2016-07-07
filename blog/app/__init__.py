@@ -10,10 +10,12 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    db.init_app(app)
     moment.init_app(app)
     bootstrap.init_app(app)
     app.secret_key = 'SECRET_KEY'
+    db.init_app(app)
+    with app.app_context():
+           db.create_all()
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)

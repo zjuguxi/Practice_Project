@@ -1,7 +1,7 @@
 from . import db
 from datetime import datetime
 
-
+'''
 class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
@@ -21,6 +21,7 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.username
+'''
 
 class Post(db.Model):
     __tablename__ = 'posts'
