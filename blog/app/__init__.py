@@ -14,6 +14,7 @@ def create_app():
     bootstrap.init_app(app)
     app.secret_key = 'SECRET_KEY'
     db.init_app(app)
+    db = SQLAlchemy(app)
     with app.app_context():
            db.create_all()
 
