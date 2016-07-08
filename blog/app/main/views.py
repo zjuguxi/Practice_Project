@@ -15,9 +15,9 @@ def index():
         db.session.commit()
         return redirect(url_for('.index'))
 # 下面这两行会导致找不到表posts的错误，原因未知
-#    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
 #    return render_template('index.html', current_time = datetime.utcnow(), form = form, posts = posts)
-    return render_template('index.html', current_time = datetime.utcnow(), form = form, posta = posts)
+    return render_template('index.html', current_time = datetime.utcnow(), form = form, posts = posts)
 
 @main.errorhandler(404)
 def page_not_found(e):
