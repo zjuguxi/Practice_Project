@@ -4,6 +4,7 @@ from . import main
 from app.forms import PostForm
 from flask_login import current_user
 from ..models import Post
+from .. import db
 
 
 @main.route('/', methods = ['GET', 'POST'])
@@ -14,9 +15,7 @@ def index():
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('.index'))
-# 下面这两行会导致找不到表posts的错误，原因未知
     posts = Post.query.order_by(Post.timestamp.desc()).all()
-#    return render_template('index.html', current_time = datetime.utcnow(), form = form, posts = posts)
     return render_template('index.html', current_time = datetime.utcnow(), form = form, posts = posts)
 
 @main.errorhandler(404)
