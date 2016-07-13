@@ -3,9 +3,12 @@ import os
 from app import create_app, db
 from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager, Shell
+from flask_mail import Mail
 
 app = create_app()
 manager = Manager(app)
+mail = Mail(app)
+
 
 def make_shell_context():
     return dict(app = app, db = db)
