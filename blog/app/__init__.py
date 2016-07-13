@@ -5,6 +5,7 @@ from flask_bootstrap import Bootstrap
 from config import config
 
 
+
 moment = Moment ()
 bootstrap = Bootstrap()
 db = SQLAlchemy()
