@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, session
 from datetime import datetime
-from . import main
+from . import main, auth
 from app.forms import PostForm
 from flask_login import current_user
 from ..models import Post
@@ -21,3 +21,7 @@ def index():
 @main.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+@auth.route('/login')
+def login():
+    return render_template('auth/login.html')

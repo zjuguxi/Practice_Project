@@ -1,6 +1,7 @@
+from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from datetime import datetime
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -15,6 +16,7 @@ class Role(db.Model):
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(64), unique = True, index = True)
     username = db.Column(db.String(64), unique=True, index=True)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     posts = db.relationship('Post', backref = 'author', lazy = 'dynamic')
@@ -31,7 +33,6 @@ class User(db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
     
-
     def __repr__(self):
         return '<User %r>' % self.username
 
