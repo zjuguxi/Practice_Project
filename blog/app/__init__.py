@@ -21,6 +21,7 @@ def create_app():
     db = SQLAlchemy(app)
     app.secret_key = 'SECRET_KEY'
     db.init_app(app)
+    login_manager.init_app(app)
 
 
     from .main import main as main_blueprint
