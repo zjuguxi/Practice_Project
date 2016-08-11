@@ -20,17 +20,19 @@ else:
     print('What do you mean?')
     exit()
 
-result = 0
-# 定义n面骰
-def d(n):
-    result = randint(1, n)
-
 # 骰子的每个结果都放入一个list，初始为空
 dice = []
+# 每次单个骰子的结果值，初始为空
+result = 0
+
+# 定义n面骰
+def d(n):
+    return randint(1, n)
 
 # 重复投掷
-for i in range(1, m+1):
-   d(n)
+for i in range(m):
+   result = d(n)
    dice.append(result)
+   print(result)
 
-print(sum(dice))
+print('和为: ', sum(dice))
