@@ -20,7 +20,7 @@ else:
     print('What do you mean?')
     exit()
 
-result = 
+result = 0
 # 定义n面骰
 def d(n):
     result = randint(1, n)
@@ -33,4 +33,4 @@ for i in range(1, m+1):
    d(n)
    dice.append(result)
 
-print(dice)
+print(sum(dice))
