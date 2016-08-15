@@ -26,7 +26,6 @@ dice = []
 # 定义n面骰
 def d(n):
     return randint(1, n)
-
 # 重复投掷
 for i in range(m):
    result = d(n)
@@ -34,3 +33,6 @@ for i in range(m):
    print(result)
 
 print('和为: ', sum(dice))
+
+dice.remove(min(dice))
+print('去掉一个最小值，其余求和：', sum(dice))
