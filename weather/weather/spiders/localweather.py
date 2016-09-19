@@ -17,9 +17,9 @@ class WeatherSpider(scrapy.Spider):
         itemTemp = {}
         itemTemp['city'] = soup.find(id='slider_ct_name')
         tenDay = soup.find(id='blk_fc_c0_scroll')
-        itemTemp['date'] = tenDay.findAll("p", {"class": 'wt_fc_c0_i_date'})
-        itemTemp['dayDesc'] = tenDay.findAll("img", {"class": 'icons0_wt'})
-        itemTemp['dayTemp'] = tenDay.findAll('p', {"class": 'wt_fc_c0_i_temp'})
+        itemTemp['date'] = tenDay.find_all("p", class_='wt_fc_c0_i_date')
+        itemTemp['dayDesc'] = tenDay.find_all("img",class_='icons0_wt')
+        itemTemp['dayTemp'] = tenDay.find_all('p', class_='wt_fc_c0_i_temp')
         item = WeatherItem()
         for att in itemTemp:
             item[att] = []
