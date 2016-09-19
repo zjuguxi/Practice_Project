@@ -1,16 +1,18 @@
-# -*- coding:utf-8 -*-
+# -*- coding: utf-8 -*-
 import scrapy
+import lxml
 from bs4 import BeautifulSoup
 from weather.items import WeatherItem
 
+
 class WeatherSpider(scrapy.Spider):
-    name = 'myweather'
-    allowed_domains = ['sina.com.cn']
+    name = "myweather"
+    allowed_domains = ["sina.com.cn"]
     start_urls = ['http://weather.sina.com.cn']
 
     def parse(self, response):
         html_doc = response.body
-        html_doc = html_doc.decode('utf-8')
+        #html_doc = html_doc.decode('utf-8')
         soup = BeautifulSoup(html_doc)
         itemTemp = {}
         itemTemp['city'] = soup.find(id='slider_ct_name')

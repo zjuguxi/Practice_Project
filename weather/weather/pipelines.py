@@ -11,7 +11,7 @@ class WeatherPipeline(object):
 
     def process_item(self, item, spider):
         with open('wea.txt', 'w+') as file:
-            city = item['city'].encode('utf-8')
+            city = item['city'][0].encode('utf-8')
             file.write('city:' + str(city) + '\n\n')
 
             date = item['date']
