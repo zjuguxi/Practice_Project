@@ -3,7 +3,7 @@ import random
 
 origin_list = []
 
-for i in range(100000):
+for i in range(10000):
     n = random.randint(1, 9999999999)
     origin_list.append(n)
 
@@ -20,6 +20,6 @@ def bubble_sort(bubble_list):
                 bubble_list[j-1], bubble_list[j] = bubble_list[j], bubble_list[j-1]       #则交换两者
     return bubble_list
 
-bubble_sort(bubble_list)
+# bubble_sort(bubble_list)
 bubble_elapse_time = time.time() - bubble_start_time
 print("Bubble Sort:  %s second " % (round(bubble_elapse_time, 3)))

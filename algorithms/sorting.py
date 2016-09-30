@@ -3,7 +3,7 @@ import random
 
 origin_list = []
 
-for i in range(100000):
+for i in range(10000):
     n = random.randint(1, 9999999999)
     origin_list.append(n)
 
@@ -79,6 +79,59 @@ def bubble_sort(bubble_list):
                 bubble_list[j-1], bubble_list[j] = bubble_list[j], bubble_list[j-1]       #则交换两者
     return bubble_list
 
-bubble_sort(bubble_list)
+## bubble_sort(bubble_list)
 bubble_elapse_time = time.time() - bubble_start_time
-print("Bubble Sort:  %s second " % (round(bubble_elapse_time, 3)))
+# print("Bubble Sort:  %s second " % (round(bubble_elapse_time, 3)))
+print('Bubble Sort: Too slow.............Skip it!')
+
+############## 插入排序
+
+insert_list = origin_list
+insert_start_time = time.time()
+
+def insert_sort(insert_list):
+    n = len(insert_list)
+    for i in range(1,n):
+        if insert_list[i] < insert_list[i-1]:
+            temp = insert_list[i]
+            index = i           #待插入的下标
+            for j in range(i-1,-1,-1):  #从i-1 循环到 0 (包括0)
+                if insert_list[j] > temp :
+                    insert_list[j+1] = insert_list[j]
+                    index = j   #记录待插入下标
+                else :
+                    break
+            insert_list[index] = temp
+    return insert_list
+insert_sort(insert_list)
+insert_elapse_time = time.time() - insert_start_time
+print("Insert Sort:  %s second " % (round(insert_elapse_time, 3)))
+
+############## 快速排序
+
+quick_list = origin_list
+quick_start_time = time.time()
+
+def quick_sort(quick_list):
+    return qsort(quick_list,0,len(quick_list)-1)
+
+def qsort(quick_list,left,right):
+    #快排函数，quick_list为待排序数组，left为待排序的左边界，right为右边界
+    if left >= right : return quick_list
+    key = quick_list[left]     #取最左边的为基准数
+    lp = left           #左指针
+    rp = right          #右指针
+    while lp < rp :
+        while quick_list[rp] >= key and lp < rp :
+            rp -= 1
+        while quick_list[lp] <= key and lp < rp :
+            lp += 1
+        quick_list[lp],quick_list[rp] = quick_list[rp],quick_list[lp]
+    quick_list[left],quick_list[lp] = quick_list[lp],quick_list[left]
+    qsort(quick_list,left,lp-1)
+    qsort(quick_list,rp+1,right)
+    return quick_list
+
+quick_sort(quick_list)
+quick_elapse_time = time.time() - quick_start_time
+print("Quick Sort:  %s second " % (round(quick_elapse_time, 3)))
