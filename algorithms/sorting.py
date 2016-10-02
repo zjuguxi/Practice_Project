@@ -109,35 +109,52 @@ insert_elapse_time = insert_end_time - insert_start_time
 print("Insert Sort:  %s second " % (round(insert_elapse_time, 3)))
 
 
-'''
-quick_list = origin_list  ############## 快速排序
+list_ = origin_list  ############## 快速排序
+
+def quick_sort_iterative(list_, left, right):
+    """
+    Iterative version of quick sort
+    """
+    temp_stack = []
+    temp_stack.append((left,right))
+    
+    #Main loop to pop and push items until stack is empty
+    while temp_stack:      
+        pos = temp_stack.pop()
+        right, left = pos[1], pos[0]
+        piv = partition(list_,left,right)
+        #If items in the left of the pivot push them to the stack
+        if piv-1 > left:
+            temp_stack.append((left,piv-1))
+        #If items in the right of the pivot push them to the stack
+        if piv+1 < right:
+            temp_stack.append((piv+1,right))
+  
+def partition(list_, left, right):
+    piv = list_[left]
+    i = left + 1
+    j = right
+ 
+    while 1:
+        while i <= j  and list_[i] <= piv:
+            i +=1
+        while j >= i and list_[j] >= piv:
+            j -=1
+        if j <= i:
+            break
+        #Exchange items
+        list_[i], list_[j] = list_[j], list_[i]
+    #Exchange pivot to the right position
+    list_[left], list_[j] = list_[j], list_[left]
+    return j
 
 
-def quick_sort(quick_list):
-    return qsort(quick_list,0,len(quick_list)-1)
-
-def qsort(quick_list,left,right):
-    #快排函数，quick_list为待排序数组，left为待排序的左边界，right为右边界
-    if left >= right : return quick_list
-    key = quick_list[left]     #取最左边的为基准数
-    lp = left           #左指针
-    rp = right          #右指针
-    while lp < rp :
-        while quick_list[rp] >= key and lp < rp :
-            rp -= 1
-        while quick_list[lp] <= key and lp < rp :
-            lp += 1
-        quick_list[lp],quick_list[rp] = quick_list[rp],quick_list[lp]
-    quick_list[left],quick_list[lp] = quick_list[lp],quick_list[left]
-    qsort(quick_list,left,lp-1)
-    qsort(quick_list,rp+1,right)
-    return quick_list
 quick_start_time = timeit.default_timer()
-quick_sort(quick_list)
+quick_sort_iterative(list_, left, right)
 quick_end_time = timeit.default_timer()
 quick_elapse_time = quick_end_time - quick_start_time
 print("Quick Sort:  %s second " % (round(quick_elapse_time, 3)))
-'''
+
 
 select_list = origin_list  ############## 选择排序
 
