@@ -1,12 +1,17 @@
 import timeit
 import random
+import sys
+
+sys.setrecursionlimit(999999)
 
 origin_list = []
-
-for i in range(50000):
+list_start = timeit.default_timer()
+for i in range(10000000):
     n = random.randint(1, 9999999999)
     origin_list.append(n)
-
+list_end = timeit.default_timer()
+list_time = round((list_end - list_start),3)
+print('List time : %s' % list_time) 
 print('Length of the list: ', len(origin_list))
 
 from collections import deque ############## 归并排序
@@ -78,10 +83,10 @@ def bubble_sort(bubble_list):
                 bubble_list[j-1], bubble_list[j] = bubble_list[j], bubble_list[j-1]
     return bubble_list
 bubble_start_time = timeit.default_timer()
-## bubble_sort(bubble_list)
+#bubble_sort(bubble_list)
 bubble_end_time = timeit.default_timer()
 bubble_elapse_time = bubble_end_time - bubble_start_time
-# print("Bubble Sort:  %s second " % (round(bubble_elapse_time, 3)))
+#print("Bubble Sort:  %s second " % (round(bubble_elapse_time, 3)))
 print('Bubble Sort: Too slow.............Skip it!')
 
 
@@ -111,49 +116,17 @@ print("Insert Sort:  %s second " % (round(insert_elapse_time, 3)))
 
 list_ = origin_list  ############## 快速排序
 
-def quick_sort_iterative(list_, left, right):
-    """
-    Iterative version of quick sort
-    """
-    temp_stack = []
-    temp_stack.append((left,right))
-    
-    #Main loop to pop and push items until stack is empty
-    while temp_stack:      
-        pos = temp_stack.pop()
-        right, left = pos[1], pos[0]
-        piv = partition(list_,left,right)
-        #If items in the left of the pivot push them to the stack
-        if piv-1 > left:
-            temp_stack.append((left,piv-1))
-        #If items in the right of the pivot push them to the stack
-        if piv+1 < right:
-            temp_stack.append((piv+1,right))
-  
-def partition(list_, left, right):
-    piv = list_[left]
-    i = left + 1
-    j = right
- 
-    while 1:
-        while i <= j  and list_[i] <= piv:
-            i +=1
-        while j >= i and list_[j] >= piv:
-            j -=1
-        if j <= i:
-            break
-        #Exchange items
-        list_[i], list_[j] = list_[j], list_[i]
-    #Exchange pivot to the right position
-    list_[left], list_[j] = list_[j], list_[left]
-    return j
+quick_sort_list = origin_list
+def quick_sort(quick_sort_list):
+    if len(quick_sort_list) <= 1: return quick_sort_list
+    return quick_sort([x for x in quick_sort_list if x < quick_sort_list[0]]) + [x for x in quick_sort_list if x == quick_sort_list[0]] + quick_sort([x for x in quick_sort_list if x > quick_sort_list[0]])
 
+start = timeit.default_timer()
+#quick_sort(quick_sort_list)
+end = timeit.default_timer()
 
-quick_start_time = timeit.default_timer()
-quick_sort_iterative(list_, left, right)
-quick_end_time = timeit.default_timer()
-quick_elapse_time = quick_end_time - quick_start_time
-print("Quick Sort:  %s second " % (round(quick_elapse_time, 3)))
+quick_sort_elapse_time = end - start
+#print("Quick Sort:  %s second " % (round(quick_sort_elapse_time, 3)))
 
 
 select_list = origin_list  ############## 选择排序
@@ -168,11 +141,11 @@ def select_sort(select_list):
         select_list[min],select_list[i] = select_list[i],select_list[min] 
     return select_list
 select_start_time = timeit.default_timer()
-# select_sort(select_list)
+select_sort(select_list)
 select_end_time = timeit.default_timer()
 select_elapse_time = select_end_time - select_start_time
-# print("Selection Sort:  %s second " % (round(select_elapse_time, 3)))
-print('Selection Sort: Too slow.............Skip it!')
+print("Selection Sort:  %s second " % (round(select_elapse_time, 3)))
+#print('Selection Sort: Too slow.............Skip it!')
 
 
 shell_list = origin_list  ############## 希尔排序
