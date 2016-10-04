@@ -5,11 +5,12 @@ import sys
 sys.setrecursionlimit(999999)
 
 list_start = timeit.default_timer()
-origin_list = list(nprnd.randint(100000000, size = 10000000))
+origin_list = list(nprnd.randint(100000000, size = 10000))
 list_end = timeit.default_timer()
 list_time = round((list_end - list_start),3)
 print('List time : %s' % list_time) 
 print('Length of the list: ', len(origin_list))
+print('==============')
 
 from collections import deque ############## 归并排序
 merge_list = origin_list
@@ -34,7 +35,7 @@ start_time = timeit.default_timer()
 merge_sort(merge_list)
 end_time = timeit.default_timer()
 elapse_time = end_time- start_time
-print("Merge Sort:  %s second " % (round(elapse_time, 3)))
+print("Merge Sort:  %s s " % (round(elapse_time, 3)))
 
 
 heap_list = origin_list ############## 堆排序
@@ -65,7 +66,7 @@ heap_start_time = timeit.default_timer()
 heap_sort(heap_list)
 heap_end_time = timeit.default_timer()
 heap_elapse_time = heap_end_time - heap_start_time
-print("Heap Sort:  %s second " % (round(heap_elapse_time, 3)))
+print("Heap Sort:  %s s " % (round(heap_elapse_time, 3)))
 
 
 
@@ -80,11 +81,11 @@ def bubble_sort(bubble_list):
                 bubble_list[j-1], bubble_list[j] = bubble_list[j], bubble_list[j-1]
     return bubble_list
 bubble_start_time = timeit.default_timer()
-#bubble_sort(bubble_list)
+bubble_sort(bubble_list)
 bubble_end_time = timeit.default_timer()
 bubble_elapse_time = bubble_end_time - bubble_start_time
-#print("Bubble Sort:  %s second " % (round(bubble_elapse_time, 3)))
-print('Bubble Sort: Too slow.............Skip it!')
+print("Bubble Sort:  %s s " % (round(bubble_elapse_time, 3)))
+#print('Bubble Sort: Too slow.............Skip it!')
 
 
 
@@ -108,22 +109,37 @@ insert_start_time = timeit.default_timer()
 insert_sort(insert_list)
 insert_end_time = timeit.default_timer()
 insert_elapse_time = insert_end_time - insert_start_time
-print("Insert Sort:  %s second " % (round(insert_elapse_time, 3)))
+print("Insert Sort:  %s s " % (round(insert_elapse_time, 3)))
 
 
-list_ = origin_list  ############## 快速排序
+quick_list = origin_list  ############## 快速排序
 
-quick_sort_list = origin_list
-def quick_sort(quick_sort_list):
-    if len(quick_sort_list) <= 1: return quick_sort_list
-    return quick_sort([x for x in quick_sort_list if x < quick_sort_list[0]]) + [x for x in quick_sort_list if x == quick_sort_list[0]] + quick_sort([x for x in quick_sort_list if x > quick_sort_list[0]])
+def quick_sort(quick_list):
+    return qsort(quick_list,0,len(quick_list)-1)
+
+def qsort(quick_list,left,right):
+    #快排函数，quick_list为待排序数组，left为待排序的左边界，right为右边界
+    if left >= right : return quick_list
+    key = quick_list[left]     #取最左边的为基准数
+    lp = left           #左指针
+    rp = right          #右指针
+    while lp < rp :
+        while quick_list[rp] >= key and lp < rp :
+            rp -= 1
+        while quick_list[lp] <= key and lp < rp :
+            lp += 1
+        quick_list[lp],quick_list[rp] = quick_list[rp],quick_list[lp]
+    quick_list[left],quick_list[lp] = quick_list[lp],quick_list[left]
+    qsort(quick_list,left,lp-1)
+    qsort(quick_list,rp+1,right)
+    return quick_list
 
 start = timeit.default_timer()
-#quick_sort(quick_sort_list)
+quick_sort(quick_list)
 end = timeit.default_timer()
 
 quick_sort_elapse_time = end - start
-#print("Quick Sort:  %s second " % (round(quick_sort_elapse_time, 3)))
+print("Quick Sort:  %s s " % (round(quick_sort_elapse_time, 3)))
 
 
 select_list = origin_list  ############## 选择排序
@@ -141,7 +157,7 @@ select_start_time = timeit.default_timer()
 select_sort(select_list)
 select_end_time = timeit.default_timer()
 select_elapse_time = select_end_time - select_start_time
-print("Selection Sort:  %s second " % (round(select_elapse_time, 3)))
+print("Selection Sort:  %s s " % (round(select_elapse_time, 3)))
 #print('Selection Sort: Too slow.............Skip it!')
 
 
@@ -164,7 +180,7 @@ shell_start_time = timeit.default_timer()
 shell_sort(shell_list)
 shell_end_time = timeit.default_timer()
 shell_elapse_time = shell_end_time - shell_start_time
-print("Shell Sort:  %s second " % (round(shell_elapse_time, 3)))
+print("Shell Sort:  %s s " % (round(shell_elapse_time, 3)))
 
 
 heap_list = origin_list ############## 堆排序
@@ -195,4 +211,4 @@ heap_start_time = timeit.default_timer()
 heap_sort(heap_list)
 heap_end_time = timeit.default_timer()
 heap_elapse_time = timeit.default_timer() - heap_start_time
-print("Heap Sort:  %s second " % (round(heap_elapse_time, 3)))
+print("Heap Sort:  %s s " % (round(heap_elapse_time, 3)))
