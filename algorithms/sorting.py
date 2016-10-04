@@ -1,14 +1,11 @@
 import timeit
-import random
+import numpy.random as nprnd
 import sys
 
 sys.setrecursionlimit(999999)
 
-origin_list = []
 list_start = timeit.default_timer()
-for i in range(10000000):
-    n = random.randint(1, 9999999999)
-    origin_list.append(n)
+origin_list = list(nprnd.randint(100000000, size = 10000000))
 list_end = timeit.default_timer()
 list_time = round((list_end - list_start),3)
 print('List time : %s' % list_time) 

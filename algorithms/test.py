@@ -1,26 +1,11 @@
+import numpy.random as nprnd
 import timeit
-import random
-import sys
-#sys.setrecursionlimit(99999)
-origin_list = []
-list_start = timeit.default_timer()
-for i in range(10000000):
-    n = random.randint(1, 9999999999)
-    origin_list.append(n)
-list_end = timeit.default_timer()
-list_time = list_end - list_start
-print('List time : %s' % list_time) 
-print('Length of the list: ', len(origin_list))
 
-quick_sort_list = origin_list
-def quick_sort(quick_sort_list):
-    if len(quick_sort_list) <= 1: return quick_sort_list
-    return quick_sort([x for x in quick_sort_list if x < quick_sort_list[0]]) + [x for x in quick_sort_list if x == quick_sort_list[0]] + quick_sort([x for x in quick_sort_list if x > quick_sort_list[0]])
+t1 = timeit.Timer('[random.randint(0,1000) for r in xrange(10000)]','import random') # v1
+### change v2 so that it picks numbers in (0,10000) and thus runs...
+t2 = timeit.Timer('random.sample(range(10000), 10000)','import random') # v2
+t3 = timeit.Timer('nprnd.randint(1000, size=10000)','import numpy.random as nprnd') # v3
 
-
-start = timeit.default_timer()
-quick_sort(quick_sort_list)
-end = timeit.default_timer()
-
-quick_sort_elapse_time = end - start
-print("Quick Sort:  %s second " % (round(quick_sort_elapse_time, 3)))
+print(t1.timeit(1000)/1000)
+print(t2.timeit(1000)/1000)
+print(t3.timeit(1000)/1000)
