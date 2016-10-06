@@ -6,6 +6,8 @@ sys.setrecursionlimit(999999)
 
 list_start = timeit.default_timer()
 origin_list = list(nprnd.randint(100000000, size = 10000))
+nprnd.shuffle(origin_list)
+
 list_end = timeit.default_timer()
 list_time = round((list_end - list_start),3)
 print('List time : %s' % list_time) 

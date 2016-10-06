@@ -1,11 +1,19 @@
 import numpy.random as nprnd
 import timeit
 
-t1 = timeit.Timer('[random.randint(0,1000) for r in xrange(10000)]','import random') # v1
-### change v2 so that it picks numbers in (0,10000) and thus runs...
-t2 = timeit.Timer('random.sample(range(10000), 10000)','import random') # v2
-t3 = timeit.Timer('nprnd.randint(1000, size=10000)','import numpy.random as nprnd') # v3
+list_start = timeit.default_timer()
+origin_list = list(nprnd.randint(100000000, size = 10000))
+nprnd.shuffle(origin_list)
 
-print(t1.timeit(1000)/1000)
-print(t2.timeit(1000)/1000)
-print(t3.timeit(1000)/1000)
+list_end = timeit.default_timer()
+list_time = round((list_end - list_start),3)
+print('List time : %s' % list_time) 
+print('Length of the list: ', len(origin_list))
+print('==============')
+
+list = origin_list
+
+n = len(list)
+for i in (0,n):
+    list[i] = min(list)
+    for j in 
