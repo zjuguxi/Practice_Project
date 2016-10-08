@@ -6,7 +6,7 @@ sys.setrecursionlimit(999999)
 
 list_start = timeit.default_timer()
 origin_list = list(nprnd.randint(100000000, size = 10000))
-nprnd.shuffle(origin_list)
+#nprnd.shuffle(origin_list)
 
 list_end = timeit.default_timer()
 list_time = round((list_end - list_start),3)
@@ -120,11 +120,10 @@ def quick_sort(quick_list):
     return qsort(quick_list,0,len(quick_list)-1)
 
 def qsort(quick_list,left,right):
-    #快排函数，quick_list为待排序数组，left为待排序的左边界，right为右边界
     if left >= right : return quick_list
-    key = quick_list[left]     #取最左边的为基准数
-    lp = left           #左指针
-    rp = right          #右指针
+    key = quick_list[left]
+    lp = left
+    rp = right
     while lp < rp :
         while quick_list[rp] >= key and lp < rp :
             rp -= 1
