@@ -6,13 +6,31 @@ sys.setrecursionlimit(999999)
 
 list_start = timeit.default_timer()
 origin_list = list(nprnd.randint(100000000, size = 10000))
-#nprnd.shuffle(origin_list)
 
 list_end = timeit.default_timer()
 list_time = round((list_end - list_start),3)
-print('List time : %s' % list_time) 
+print('List time : %s s' % list_time) 
 print('Length of the list: ', len(origin_list))
 print('==============')
+
+test_list = origin_list
+list_start = timeit.default_timer()
+test_list.sort()
+list_end = timeit.default_timer()
+list_time = round((list_end - list_start),3)
+print('Unit test finished: %s s' % list_time)
+
+
+
+
+
+
+
+
+
+
+
+
 
 from collections import deque ############## 归并排序
 merge_list = origin_list
@@ -37,39 +55,11 @@ start_time = timeit.default_timer()
 merge_sort(merge_list)
 end_time = timeit.default_timer()
 elapse_time = end_time- start_time
+if merge_list == test_list:
+    print('Merge Sort Pass!')
+else:
+    print('Merge Sort has a mistake.')
 print("Merge Sort:  %s s " % (round(elapse_time, 3)))
-
-
-heap_list = origin_list ############## 堆排序
-
-def heap_sort(heap_list) :
-    n = len(heap_list)
-    first = int(n/2-1)
-    for start in range(first,-1,-1) :
-        max_heapify(heap_list,start,n-1)
-    for end in range(n-1,0,-1):
-        heap_list[end],heap_list[0] = heap_list[0],heap_list[end]
-        max_heapify(heap_list,0,end-1)
-    return heap_list
-
-def max_heapify(heap_list,start,end):
-    root = start
-    while True :
-        child = root*2 +1
-        if child > end : break
-        if child+1 <= end and heap_list[child] < heap_list[child+1] :
-            child = child+1
-        if heap_list[root] < heap_list[child] :
-            heap_list[root],heap_list[child] = heap_list[child],heap_list[root]
-            root = child
-        else :
-            break
-heap_start_time = timeit.default_timer() 
-heap_sort(heap_list)
-heap_end_time = timeit.default_timer()
-heap_elapse_time = heap_end_time - heap_start_time
-print("Heap Sort:  %s s " % (round(heap_elapse_time, 3)))
-
 
 
 bubble_list = origin_list ############## 冒泡排序
