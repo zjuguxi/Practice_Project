@@ -18,19 +18,6 @@ list_start = timeit.default_timer()
 test_list.sort()
 list_end = timeit.default_timer()
 list_time = round((list_end - list_start),3)
-print('Unit test finished: %s s' % list_time)
-
-
-
-
-
-
-
-
-
-
-
-
 
 from collections import deque ############## 归并排序
 merge_list = origin_list
@@ -55,10 +42,6 @@ start_time = timeit.default_timer()
 merge_sort(merge_list)
 end_time = timeit.default_timer()
 elapse_time = end_time- start_time
-if merge_list == test_list:
-    print('Merge Sort Pass!')
-else:
-    print('Merge Sort has a mistake.')
 print("Merge Sort:  %s s " % (round(elapse_time, 3)))
 
 
