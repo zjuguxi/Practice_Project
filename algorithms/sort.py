@@ -44,10 +44,9 @@ class Sort(object):
     def get_time(self):
         pass
 
-
 class Bubble_sort(Sort): ############## Bubble Sort
     @classmethod
-    def sort(cls, bubble_list):
+    def sort(cls):
         global bubble_elapse_time
         n = len(bubble_list)
         bubble_start_time = timeit.default_timer()
@@ -56,17 +55,16 @@ class Bubble_sort(Sort): ############## Bubble Sort
             for j in range(1, n - i):
                 if bubble_list[j - 1] > bubble_list[j]:
                     bubble_list[j - 1], bubble_list[j] = bubble_list[j], bubble_list[j - 1]
-        #return bubble_list
-
+        
         bubble_end_time = timeit.default_timer()
         bubble_elapse_time = round((bubble_end_time - bubble_start_time), 4)
-        return bubble_elapse_time
+        #return bubble_elapse_time
         print('Bubble Sort Time: {}s'.format(bubble_elapse_time))
-
+        return bubble_list
     @classmethod
     def get_time(cls):
         return bubble_elapse_time
-
+'''
 class Selection_sort(Sort): ############## Selection Sort
     @classmethod
     def sort(cls):
@@ -87,3 +85,4 @@ class Selection_sort(Sort): ############## Selection Sort
     @classmethod
     def get_time(cls):
         return selection_elapse_time
+'''

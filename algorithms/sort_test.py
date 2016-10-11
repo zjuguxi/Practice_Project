@@ -17,10 +17,11 @@ class TestSort(unittest.TestCase):
 
     def setUp(self):
         self.origin_list = list(nprnd.randint(1000000, size=200))
-        bubble_list = self.origin_list
-        test_list = self.origin_list.sort()
+
 
     def test_bubble_sort(self):
+        bubble_list = self.origin_list
+        test_list = self.origin_list.sort()
         self.assertEqual(Bubble_sort.sort(self.origin_list), self.origin_list.sort())
 
 if __name__ == '__main__':
