@@ -5,7 +5,7 @@ import sys
 sys.setrecursionlimit(999999)
 
 list_start = timeit.default_timer()
-origin_list = list(nprnd.randint(1000000, size=2000))
+origin_list = list(nprnd.randint(1000000, size=200))
 list_end = timeit.default_timer()
 list_time = round((list_end - list_start), 4)
 print('List time : %s s' % list_time)
