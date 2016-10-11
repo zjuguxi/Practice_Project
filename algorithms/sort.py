@@ -30,8 +30,10 @@ print('Length of the list: ', len(origin_list))
 bubble_list = origin_list
 selection_list = origin_list
 
+
 bubble_elapse_time = 0
 selection_elapse_time = 0
+
 class Sort(object):
     def __init__(self):
         pass
@@ -45,20 +47,20 @@ class Sort(object):
 
 class Bubble_sort(Sort): ############## Bubble Sort
     @classmethod
-    def sort(cls, list_to_sort):
+    def sort(cls, bubble_list):
         global bubble_elapse_time
-        n = len(list_to_sort)
+        n = len(bubble_list)
         bubble_start_time = timeit.default_timer()
 
         for i in range(n):
             for j in range(1, n - i):
-                if list_to_sort[j - 1] > list_to_sort[j]:
-                    list_to_sort[j - 1], list_to_sort[j] = list_to_sort[j], list_to_sort[j - 1]
-        return list_to_sort
+                if bubble_list[j - 1] > bubble_list[j]:
+                    bubble_list[j - 1], bubble_list[j] = bubble_list[j], bubble_list[j - 1]
+        #return bubble_list
 
         bubble_end_time = timeit.default_timer()
         bubble_elapse_time = round((bubble_end_time - bubble_start_time), 4)
-        #return bubble_elapse_time
+        return bubble_elapse_time
         print('Bubble Sort Time: {}s'.format(bubble_elapse_time))
 
     @classmethod
