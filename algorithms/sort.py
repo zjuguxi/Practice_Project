@@ -64,7 +64,7 @@ class Bubble_sort(Sort): ############## Bubble Sort
     @classmethod
     def get_time(cls):
         return bubble_elapse_time
-'''
+
 class Selection_sort(Sort): ############## Selection Sort
     @classmethod
     def sort(cls):
@@ -77,12 +77,11 @@ class Selection_sort(Sort): ############## Selection Sort
                 if selection_list[j] < selection_list[min] :
                     min = j
             selection_list[min],selection_list[i] = selection_list[i],selection_list[min]
-        #return selection_list
+        
         selection_end_time = timeit.default_timer()
         selection_elapse_time = round((selection_end_time - selection_start_time), 3)
-        return selection_elapse_time
+        return selection_list
 
     @classmethod
     def get_time(cls):
         return selection_elapse_time
-'''

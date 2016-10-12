@@ -15,14 +15,15 @@ import numpy.random as nprnd
 
 class TestSort(unittest.TestCase):
 
-    def setUp(self):
+    def setUp(self, origin_list):
         self.origin_list = list(nprnd.randint(1000000, size=200))
 
-
-    def test_bubble_sort(self):
-        bubble_list = self.origin_list
+    @classmethod
+    def test_bubble_sort(cls, self.origin_list):
+        bubble_list = setUp.origin_list
         test_list = self.origin_list.sort()
-        self.assertEqual(Bubble_sort.sort(self.origin_list), self.origin_list.sort())
+        cls.assertEqual(Bubble_sort.sort(bubble_list), self.origin_list)
+
 
 if __name__ == '__main__':
     unittest.main()
