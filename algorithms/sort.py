@@ -42,7 +42,6 @@ class Bubble(Sort): ############## Bubble Sort
                     bubble_list[j - 1], bubble_list[j] = bubble_list[j], bubble_list[j - 1]        
         bubble_end_time = timeit.default_timer()
         self.time = round((bubble_end_time - bubble_start_time), 4)
-        #return self.time
         return bubble_list
         print('Bubble Sort Time: {}s'.format(self.time))
 bubble = Bubble()
