@@ -79,7 +79,7 @@ class Selection_sort(Sort): ############## Selection Sort
             selection_list[min],selection_list[i] = selection_list[i],selection_list[min]
         
         selection_end_time = timeit.default_timer()
-        selection_elapse_time = round((selection_end_time - selection_start_time), 3)
+        selection_elapse_time = round((selection_end_time - selection_start_time), 4)
         return selection_list
 
     @classmethod
