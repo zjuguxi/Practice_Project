@@ -1,6 +1,7 @@
 import timeit
 import numpy.random as nprnd
 import sys
+import collections
 from collections import deque # for merge sort
 
 sys.setrecursionlimit(999999) # 设置递归深度
@@ -8,9 +9,9 @@ list_start = timeit.default_timer()
 origin_list = list(nprnd.randint(1000000, size=2000)) # 创建随机数组
 list_end = timeit.default_timer()
 list_time = round((list_end - list_start), 4)
+print('==============')
 print('List time : %s s' % list_time)
 print('Length of the list: ', len(origin_list))
-print('==============')
 test_list = origin_list[:]
 test_list_start = timeit.default_timer()
 test_list.sort()
@@ -25,6 +26,8 @@ selection_list = origin_list[:]
 insertion_list = origin_list[:]
 shell_list = origin_list[:]
 merge_list = origin_list[:]
+quick_list = origin_list[:]
+heap_list = origin_list[:]
 
 class Sort(object): ############## Base Class
     def __init__(self):
@@ -107,13 +110,13 @@ class Shell(Sort): ############## Shell Sort
         return shell_list
 shell = Shell()
 
-
-class Merge(Sort):
+'''
+class Merge(Sort): ############## Merge Sort
     def sort(self):
         if len(merge_list) <= 1 : return merge_list
         num = int(len(merge_list)/2)
-        left = sort(merge_list[:num])
-        right = sort(merge_list[num:])
+        left = Merge.sort(merge_list[:num])
+        right = Merge.sort(merge_list[num:])
         return merge(left,right)
 
     def merge(left,right):
@@ -130,5 +133,76 @@ class Merge(Sort):
         result += right[r:]
         return result
 merge = Merge()
+'''
+class Quick(Sort): ############## Quick Sort
+    
+    def sort(self):
+        global quick_list
+        quick_start_time = timeit.default_timer()
+        quick_list = Quick.qsort(quick_list,0,len(quick_list)-1)
+        quick_end_time = timeit.default_timer()
+        self.time = round((quick_end_time - quick_start_time), 4)
+        return quick_list
+        
+    def qsort(quick_list,left,right):
+        if left >= right : return quick_list
+        key = quick_list[left]
+        lp = left
+        rp = right
+        while lp < rp :
+            while quick_list[rp] >= key and lp < rp :
+                rp -= 1
+            while quick_list[lp] <= key and lp < rp :
+                lp += 1
+            quick_list[lp],quick_list[rp] = quick_list[rp],quick_list[lp]
+        quick_list[left],quick_list[lp] = quick_list[lp],quick_list[left]
+        Quick.qsort(quick_list,left,lp-1)
+        Quick.qsort(quick_list,rp+1,right)
+        return quick_list  
+quick = Quick()
 
+class Heap(Sort): ############## Heap Sort
+    
+    def sort(self):
+        heap_start_time = timeit.default_timer()
+        n = len(heap_list)
+        first = int(n/2-1) 
+        for start in range(first,-1,-1) : 
+            Heap.max_heapify(heap_list,start,n-1)
+        for end in range(n-1,0,-1): 
+            heap_list[end],heap_list[0] = heap_list[0],heap_list[end]
+            Heap.max_heapify(heap_list,0,end-1)
+        heap_end_time = timeit.default_timer()
+        self.time = round((heap_end_time - heap_start_time), 4)
+        return heap_list
 
+    def max_heapify(heap_list,start,end):
+        root = start
+        while True :
+            child = root*2 +1
+            if child > end : break
+            if child+1 <= end and heap_list[child] < heap_list[child+1] :
+                child = child+1 
+            if heap_list[root] < heap_list[child] :   
+                heap_list[root],heap_list[child] = heap_list[child],heap_list[root]
+                root = child
+            else :
+                break
+heap = Heap()
+'''
+bubble.sort()
+selection.sort()
+insertion.sort()
+shell.sort()
+#merge.sort()
+quick.sort()
+heap.sort()
+
+print(bubble.get_time())
+print(selection.get_time())
+print(insertion.get_time())
+print(shell.get_time())
+#print(merge.get_time())
+print(quick.get_time())
+print(heap.get_time())
+'''
