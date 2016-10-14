@@ -66,24 +66,7 @@ print("Bubble Sort:  %s s " % (round(bubble_elapse_time, 3)))
 
 insert_list = origin_list  ############## 插入排序
 
-def insert_sort(insert_list):
-    n = len(insert_list)
-    for i in range(1,n):
-        if insert_list[i] < insert_list[i-1]:
-            temp = insert_list[i]
-            index = i
-            for j in range(i-1,-1,-1):
-                if insert_list[j] > temp :
-                    insert_list[j+1] = insert_list[j]
-                    index = j
-                else :
-                    break
-            insert_list[index] = temp
-    return insert_list
-insert_start_time = timeit.default_timer()
-insert_sort(insert_list)
-insert_end_time = timeit.default_timer()
-insert_elapse_time = insert_end_time - insert_start_time
+
 print("Insert Sort:  %s s " % (round(insert_elapse_time, 3)))
 
 
