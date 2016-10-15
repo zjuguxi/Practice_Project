@@ -221,6 +221,8 @@ table = []
 headers = ['Algorithms', 'Time (s)']
 sort_name = ['bubble','selection','insertion','shell','merge','quick','heap', 'all']
 
+
+
 if sys.argv[1] == sort_name[0]:
     bubble.sort(bubble_list)
     table.append(['Bubble Sort', bubble.get_time()])
