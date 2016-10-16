@@ -1,7 +1,6 @@
 import timeit
 import numpy.random as nprnd
 import sys
-import collections
 from tabulate import tabulate
 
 try: # 判断第二个参数是否是整数，如果不是抛出异常，如果是，则赋值给sort_number

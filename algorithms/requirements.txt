@@ -1,0 +1,5 @@
+# 执行这行命令 pip install -r requirements.txt
+
+numpy
+tabulate
+timeit
