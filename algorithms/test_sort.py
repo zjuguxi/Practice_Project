@@ -1,5 +1,11 @@
 import unittest
+import sys
+import random
+
+n = random.randint(3*10**2,3*10**3)
+sys.argv = ['test_sort.py', 'all', n, 'reversed'] # 随便写了一个命令行变量传进程序中，以供测试
 import sort
+
 
 class TestSort(unittest.TestCase):
 
@@ -24,6 +30,12 @@ class TestSort(unittest.TestCase):
 
     def test_heap(self):
         self.assertEqual(sort.heap.sort(sort.heap_list), sort.test_list)
+
+def suite():
+    suite = unittest.TestSuite()
+    suite.addTest(('test_default_size'))
+    suite.addTest(WidgetTestCase('test_resize'))
+    return suite
 
 if __name__ == '__main__':
     unittest.main()

@@ -4,8 +4,6 @@ import sys
 import collections
 from tabulate import tabulate
 
-
-
 try: # 判断第二个参数是否是整数，如果不是抛出异常，如果是，则赋值给sort_number
     sort_number=int(sys.argv[2])
 except ValueError:
@@ -19,8 +17,8 @@ list_end = timeit.default_timer()
 list_time = round((list_end - list_start), 4)
 
 print('==============')
-print('List time : %s s' % list_time)
-print('Length of the list: ', len(origin_list))
+print('Random array generated in %s s' % list_time)
+print('Size of the array: ', len(origin_list))
 
 test_list = origin_list[:]
 test_list_start = timeit.default_timer()
@@ -30,15 +28,15 @@ test_list_time = round((test_list_end - test_list_start), 4)
 
 if len(sys.argv) > 3:
     if sys.argv[3] == "reversed": # 如果含reversed参数，则传入的初识列表origin_list
-        origin_list = list(reversed(test_list)) # 为逆序，此处为了方便，直接去排序后的
-    elif sys.argv[3] == '':                                                     # test_list并将之逆序化
+        origin_list = list(reversed(test_list)) # 为逆序，此处为了方便，直接取排序后的
+    elif sys.argv[3] == '':                            # test_list并将之逆序化
         pass
     else:
         raise NameError('reversed?')
 else:
     pass
 
-print('Python sort time: %s s' % test_list_time)
+print('Python built-in sort() time: %s s' % test_list_time)
 print('==============')
 
 bubble_list = origin_list[:]
@@ -72,8 +70,6 @@ class Bubble(Sort): ############## Bubble Sort
         return bubble_list
         print('Bubble Sort Time: {}s'.format(self.time))
 bubble = Bubble()
-
-
 
 class Selection(Sort): ############## Selection Sort
     def sort(self, selection_list):
@@ -155,10 +151,10 @@ class Merge(Sort): ############## Merge  Sort
             while r < len(remaining):
                 merge_list[k] = remaining[r]
                 r += 1; k += 1
-            return merge_list
+            
             merge_end_time = timeit.default_timer()
             self.time = round((merge_end_time - merge_start_time), 4)
-
+            return merge_list
 merge = Merge()
 
 class Quick(Sort): ############## Quick Sort
@@ -217,75 +213,91 @@ class Heap(Sort): ############## Heap Sort
                 break
 heap = Heap()
 
+
+# 以下是生成表格的方法
 table = []
-headers = ['Algorithms', 'Time (s)']
+headers = ['Algorithms', 'Time (s)', 'Verification']
 sort_name = ['bubble','selection','insertion','shell','merge','quick','heap', 'all']
-
-
 
 if sys.argv[1] == sort_name[0]:
     bubble.sort(bubble_list)
-    table.append(['Bubble Sort', bubble.get_time()])
+    if bubble_list == test_list:
+        table.append(['Bubble Sort', bubble.get_time(), 'True'])
+    else:
+        table.append(['Bubble Sort', bubble.get_time(), 'False'])
 elif sys.argv[1] == sort_name[1]:
     selection.sort(selection_list)
-    table.append(['Selection Sort', selection.get_time()])
+    if selection_list == test_list:
+        table.append(['Selection Sort', selection.get_time(), 'True'])
+    else:
+        table.append(['Selection Sort', selection.get_time(), 'False'])
 elif sys.argv[1] == sort_name[2]:
     insertion.sort(insertion_list)
-    table.append(['Insertion Sort', insertion.get_time()])
+    if insertion_list == test_list:
+        table.append(['Insertion Sort', insertion.get_time(), 'True'])
+    else:
+        table.append(['Insertion Sort', insertion.get_time(), 'False'])
 elif sys.argv[1] == sort_name[3]:
     shell.sort(shell_list)
-    table.append(['Shell Sort', shell.get_time()])
+    if shell_list == test_list:
+        table.append(['Shell Sort', shell.get_time(), 'True'])
+    else:
+        table.append(['Shell Sort', shell.get_time(), 'False'])
 elif sys.argv[1] == sort_name[4]:
     merge.sort(merge_list)
-    table.append(['Merge Sort', merge.get_time()])
+    if merge_list == test_list:
+        table.append(['Merge Sort', merge.get_time(), 'True'])
+    else:
+        table.append(['MergeSort', merge.get_time(), 'False'])
 elif sys.argv[1] == sort_name[5]:
     quick.sort(quick_list)
-    table.append(['Quick Sort', quick.get_time()])
+    if quick_list == test_list:
+        table.append(['Quick Sort', quick.get_time(), 'True'])
+    else:
+        table.append(['Quick Sort', quick.get_time(), 'False'])
 elif sys.argv[1] == sort_name[6]:
     heap.sort(heap_list)
-    table.append(['Heap Sort', heap.get_time()])
+    if selection_list == test_list:
+        table.append(['Selection Sort', selection.get_time(), 'True'])
+    else:
+        table.append(['Selection Sort', selection.get_time(), 'False'])
+
 elif sys.argv[1] == sort_name[7]:
     bubble.sort(bubble_list)
+    if bubble_list == test_list:
+        table.append(['Bubble Sort', bubble.get_time(), 'True'])
+    else:
+        table.append(['Bubble Sort', bubble.get_time(), 'False'])
     selection.sort(selection_list)
+    if selection_list == test_list:
+        table.append(['Selection Sort', selection.get_time(), 'True'])
+    else:
+        table.append(['Selection Sort', selection.get_time(), 'False'])
     insertion.sort(insertion_list)
+    if insertion_list == test_list:
+        table.append(['Insertion Sort', insertion.get_time(), 'True'])
+    else:
+        table.append(['Insertion Sort', insertion.get_time(), 'False'])
     shell.sort(shell_list)
+    if shell_list == test_list:
+        table.append(['Shell Sort', shell.get_time(), 'True'])
+    else:
+        table.append(['Shell Sort', shell.get_time(), 'False'])
     merge.sort(merge_list)
+    if merge_list == test_list:
+        table.append(['Merge Sort', merge.get_time(), 'True'])
+    else:
+        table.append(['MergeSort', merge.get_time(), 'False'])
     quick.sort(quick_list)
+    if quick_list == test_list:
+        table.append(['Quick Sort', quick.get_time(), 'True'])
+    else:
+        table.append(['Quick Sort', quick.get_time(), 'False'])
     heap.sort(heap_list)
-    table.append(['Bubble Sort', bubble.get_time()])
-    table.append(['Selection Sort', selection.get_time()])
-    table.append(['Insertion Sort', insertion.get_time()])
-    table.append(['Shell Sort', shell.get_time()])
-    table.append(['Merge Sort', merge.get_time()])
-    table.append(['Quick Sort', quick.get_time()])
-    table.append(['Heap Sort', heap.get_time()])
+    if selection_list == test_list:
+        table.append(['Selection Sort', selection.get_time(), 'True'])
+    else:
+        table.append(['Selection Sort', selection.get_time(), 'False'])
 else:
     raise NameError('It is not a sorting algotithms')
-
 print(tabulate(table, headers,tablefmt='fancy_grid'))
-
-# print('脚本名：', sys.argv[0])
-# for i in range(1, len(sys.argv)):
-#     print('参数',i,sys.argv[i])
-
-
-
-
-
-'''
-bubble.sort()
-selection.sort()
-insertion.sort()
-shell.sort()
-merge.sort(merge_list)
-quick.sort()
-heap.sort()
-
-print(bubble.get_time())
-print(selection.get_time())
-print(insertion.get_time())
-print(shell.get_time())
-print(merge.get_time())
-print(quick.get_time())
-print(heap.get_time())
-'''
